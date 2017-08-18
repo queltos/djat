@@ -1,7 +1,20 @@
 {% load staticfiles %}
 <script type="text/javascript" src="{% static "Chat/client.js" %}"></script>
 
+<div id="rooms"></div>
 <div id="chat"></div>
-<label>room</label><input id="roomname"/>
-{#<button id="action">join</button>#}
-<input id="join" type="button" value="join room" onclick="onSend();"/>
+<div>
+  <label for="roomInput">room</label>
+  <input id="roomInput"/>
+  <label for="userInput">user</label>
+  <input id="userInput"/>
+  <input id="join" type="button" value="join room" onclick="onJoin();"/>
+</div>
+<div>
+</div>
+<div>
+  <input id="msgInput"/>
+  <input id="send" type="button" value="send" onclick="onSend();"/>
+</div>
+
+
