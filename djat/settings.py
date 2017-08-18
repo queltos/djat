@@ -53,8 +53,11 @@ MIDDLEWARE = [
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "asgiref.inmemory.ChannelLayer",
-        "ROUTING": "djat.routing.channel_routing"
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+	    "hosts": [("localhost", 6379)],
+        },
+        "ROUTING": "djat.routing.channel_routing",
     }
 }
 
