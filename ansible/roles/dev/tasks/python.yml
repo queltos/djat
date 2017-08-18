@@ -18,13 +18,8 @@
   command: virtualenv -p /usr/bin/python3 {{ py3env }}
            creates={{ py3env }}
 
-# ipython not working with python manage.py shell anymore :(
 - name: install ipython into virtualenv
   pip: name=ipython
-       virtualenv={{ py3env }}
-
-- name: install psycopg2 into virtualenv
-  pip: name=psycopg2
        virtualenv={{ py3env }}
 
 - name: install invoke into virtualenv
