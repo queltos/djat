@@ -3,7 +3,4 @@
 .pycharm_helpers
 .vagrant
 db.sqlite3
-Chat/__pycache__/consumers.cpython-34.pyc
-Chat/consumers.py
-djat/__pycache__/routing.cpython-34.pyc
-djat/__pycache__/settings.cpython-34.pyc
+*.pyc
