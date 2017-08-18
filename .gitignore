@@ -1,0 +1,5 @@
+.git
+.idea
+.pycharm_helpers
+.vagrant
+db.sqlite3
