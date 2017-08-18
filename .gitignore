@@ -3,4 +3,6 @@
 .pycharm_helpers
 .vagrant
 db.sqlite3
-*.pyc
+
+__pycache__/
+*.py[cod]
