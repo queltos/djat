@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class ChatMessage(models.Model):
+    room = models.TextField()
+    message = models.TextField()
+    post_date = models.DateTimeField()
