@@ -15,10 +15,4 @@
     - python34-devel
     - python34-pip
 
-- name: install redis
-  yum: name=redis
-
-- name: Start Redis and enable at boot
-  systemd: name=redis
-           enabled=yes
-           state=started
+- include: channels.yml
