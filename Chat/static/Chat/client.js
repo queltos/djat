@@ -27,7 +27,9 @@ function onJoin() {
 }
 
 function onSend() {
-    var msg = document.getElementById('msgInput').value;
+    var input = document.getElementById('msgInput');
+    var msg = input.value;
+    input.value = "";
 
     if (socket.readyState == WebSocket.OPEN) socket.send(msg);
 }
