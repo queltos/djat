@@ -4,13 +4,15 @@ function onJoin() {
     var room = document.getElementById("roomInput").value;
     var user = document.getElementById("userInput").value;
 
+
     if(room && user) {
         socket = new WebSocket("ws://" + window.location.host + "/" + room + "/?username=" + user);
 
         socket.onmessage = function(e) {
+            console.log(e.data);
             var data = JSON.parse(e.data);
             var para = document.createElement("P");
-            var text = document.createTextNode(data["username"] + ": " + data["text"]);
+            var text = document.createTextNode(data["username"] + ": " + data["message"]);
             para.appendChild(text);
             document.getElementById("chat").appendChild(para);
         }
