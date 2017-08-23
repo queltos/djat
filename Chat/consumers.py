@@ -8,7 +8,6 @@ from .models import ChatMessage
 
 
 def msg_consumer(message):
-    print('msg_consumer got a message: ' + str(message))
     room = message.content['room']
     username = message.content['username']
     ChatMessage.objects.create(
@@ -50,7 +49,6 @@ def ws_connect(message, room_name):
 
 @channel_session_user
 def ws_message(message):
-    print("sending message to room: " + message.channel_session['room'])
     Channel("chat-messages").send({
         "room": message.channel_session['room'],
         "username": message.channel_session['username'],
