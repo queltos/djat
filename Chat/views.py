@@ -14,7 +14,6 @@ def index(request):
 
 @require_POST
 def auth(request):
-    print(request.POST)
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(
