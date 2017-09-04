@@ -4,10 +4,10 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-unless Vagrant.has_plugin?("vagrant-notify-forwarder")
+#unless Vagrant.has_plugin?("vagrant-notify-forwarder")
   # Used to forward filesystem events to Vagrant for yarn
-  raise 'Missing Plugin! Use `vagrant plugin install vagrant-notify-forwarder` on host to install'
-end
+#  raise 'Missing Plugin! Use `vagrant plugin install vagrant-notify-forwarder` on host to install'
+#end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "ansible_local" do |ansible|
