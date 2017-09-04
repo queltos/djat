@@ -5,6 +5,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 unless Vagrant.has_plugin?("vagrant-notify-forwarder")
+  # Used to forward filesystem events to Vagrant for yarn
   raise 'Missing Plugin! Use `vagrant plugin install vagrant-notify-forwarder` on host to install'
 end
 
