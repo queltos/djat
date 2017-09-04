@@ -1,35 +1,43 @@
-var socket;
+let socket;
 
-function onJoin() {
-    var room = document.getElementById("roomInput").value;
-    var user = document.getElementById("userInput").value;
+function join(room) {
+  if (!room) return;
 
+  socket = new WebSocket("ws://" + window.location.host + "/" + room);
 
-    if(room && user) {
-        socket = new WebSocket("ws://" + window.location.host + "/" + room + "/?username=" + user);
+  document.getElementById("chat").innerHTML = '';
 
-        socket.onmessage = function(e) {
-            console.log(e.data);
-            var data = JSON.parse(e.data);
-            var para = document.createElement("P");
-            var text = document.createTextNode(data["username"] + ": " + data["message"]);
-            para.appendChild(text);
-            document.getElementById("chat").appendChild(para);
-        }
+  socket.onmessage = function (e) {
+    console.log(e.data);
+    let data = JSON.parse(e.data);
+    let para = document.createElement("P");
+    let text = document.createTextNode(data["username"] + ": " + data["message"]);
+    para.appendChild(text);
+    document.getElementById("chat").appendChild(para);
+  };
 
-        socket.onopen = function() {
-            var para = document.createElement("P");
-            var text = document.createTextNode(room);
-            para.appendChild(text);
-            document.getElementById("rooms").appendChild(para);
-        }
+  socket.onopen = function () {
+    let msg = document.createElement("P");
+    let text = document.createTextNode("Current room: " + room);
+    msg.appendChild(text);
+    let roomDisplay = document.getElementById("room");
+    if (roomDisplay.firstChild) {
+      roomDisplay.replaceChild(msg, roomDisplay.firstChild);
+    } else {
+      roomDisplay.appendChild(msg);
     }
+  };
 }
 
 function onSend() {
-    var input = document.getElementById('msgInput');
-    var msg = input.value;
-    input.value = "";
+  let input = document.getElementById('msgInput');
+  let msg = input.value;
+  input.value = "";
 
-    if (socket.readyState == WebSocket.OPEN) socket.send(msg);
+  if (msg.startsWith('/join ')) {
+    let room = msg.split(' ')[1];
+    join(room);
+  }
+
+  if (socket.readyState === WebSocket.OPEN) socket.send(msg);
 }
