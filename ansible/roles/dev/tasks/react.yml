@@ -1,0 +1,8 @@
+---
+- name: install wget so we can install yarn
+  yum: name=wget
+
+# sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
+  # if Node.js is not installed (probably install nodejs via EPEL):
+  # curl --silent --location https://rpm.nodesource.com/setup_6.x | sudo bash -
+# sudo yum install yarn
