@@ -1,0 +1,13 @@
+---
+# nodejs depends on http-parser. Since http-parser package was included into RHEL 7.4 it's no longer part of EPEL.
+# So we have to download it manually until CentOS 7.4 is released.
+- name: download http-parser
+  get_url:
+    url: https://kojipkgs.fedoraproject.org/packages/http-parser/2.7.1/3.el7/x86_64/http-parser-2.7.1-3.el7.x86_64.rpm
+    dest: /home/vagrant/http-parser-2.7.1-3.el7.x86_64.rpm
+
+- name: install http-parser
+  yum: name=/home/vagrant/http-parser-2.7.1-3.el7.x86_64.rpm
+
+- name: install npm
+  yum: name=npm

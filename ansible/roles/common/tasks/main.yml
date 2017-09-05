@@ -16,3 +16,4 @@
     - python34-pip
 
 - include: channels.yml
+- include: npm.yml
