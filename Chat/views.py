@@ -30,7 +30,7 @@ def auth(request):
 
 def logout_page(request):
     logout(request)
-    return HttpResponse()
+    return redirect('/login')
 
 
 def login_page(request):
