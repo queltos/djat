@@ -1,8 +1,52 @@
 ---
-- name: install wget so we can install yarn
-  yum: name=wget
+# nodejs depends on http-parser. Since http-parser package was included into RHEL 7.4 it's no longer part of EPEL.
+# So we have to download it manually until CentOS 7.4 is released. Should no longer be necessary.
+- name: download http-parser
+  get_url:
+    url: https://kojipkgs.fedoraproject.org/packages/http-parser/2.7.1/3.el7/x86_64/http-parser-2.7.1-3.el7.x86_64.rpm
+    dest: /home/vagrant/http-parser-2.7.1-3.el7.x86_64.rpm
+
+- name: install http-parser
+  yum: name=/home/vagrant/http-parser-2.7.1-3.el7.x86_64.rpm
+
+- name: add yarn repo
+  get_url:
+    url: https://dl.yarnpkg.com/rpm/yarn.repo
+    dest: /etc/yum.repos.d/yarn.repo
+
+- name: install yarn
+  yum: name=yarn
+
+###### LEARNING REACT ######
+# yarn global add webpack
+# yarn add babel-core babel-loader babel-preset-env babel-preset-react babel-preset-stage-0 --save-dev
+# yarn add react react-dom --save
+############################
+
+  # REACT INSTALLATION HOWTO:
+# yarn init
+# yarn add react react-dom
+# yarn add babel-preset-react babel-preset-es2015
+# echo '{ "presets": ["react"] }' > .babelrc
+
+# from https://blog.madewithenvy.com/getting-started-with-webpack-2-ed2b86c68783:
+# yarn add babel-loader babel-core babel-preset-es2015
+
+
 
 # sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
   # if Node.js is not installed (probably install nodejs via EPEL):
   # curl --silent --location https://rpm.nodesource.com/setup_6.x | sudo bash -
 # sudo yum install yarn
+
+
+#### Via NPM:
+
+#
+#- name: install npm
+#  yum: name=npm
+
+  # docs say this:
+  # npm install --save-dev react webpack webpack-bundle-tracker babel babel-loader
+
+  # but babel is deprecated in favor of babel-cli, seems to be the better option
