@@ -8,16 +8,15 @@ function join(room) {
   document.getElementById("chat").innerHTML = '';
 
   socket.onmessage = function (e) {
-    console.log(e.data);
     let data = JSON.parse(e.data);
-    let para = document.createElement("P");
+    let para = document.createElement("p");
     let text = document.createTextNode(data["username"] + ": " + data["message"]);
     para.appendChild(text);
     document.getElementById("chat").appendChild(para);
   };
 
   socket.onopen = function () {
-    let msg = document.createElement("P");
+    let msg = document.createElement("p");
     let text = document.createTextNode("Current room: " + room);
     msg.appendChild(text);
     let roomDisplay = document.getElementById("room");
