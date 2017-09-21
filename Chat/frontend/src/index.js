@@ -8,6 +8,7 @@ let socket;
 
 render(
   <div>
+    <div id="room"></div>
     <div id="chat"></div>
     <ChatMessage message="some message"/>
     <ChatInput onSend={onSend}/>
@@ -20,7 +21,7 @@ function join(room) {
   if (!room) return;
 
   console.log("connecting to " + window.location.host);
-  socket = new WebSocket("ws://" + window.location.host + "/" + room);
+  socket = new WebSocket("ws://" + window.location.hostname + ":8000/" + room);
 
   document.getElementById("chat").innerHTML = '';
 
@@ -53,6 +54,7 @@ function onSend() {
   if (msg.startsWith('/join ')) {
     let room = msg.split(' ')[1];
     join(room);
+    return;
   }
 
   if (socket.readyState === WebSocket.OPEN) socket.send(msg);
