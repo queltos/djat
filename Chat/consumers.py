@@ -2,6 +2,7 @@ import json
 from channels import Group, Channel
 from channels.auth import channel_session_user, channel_session_user_from_http
 from datetime import datetime
+from django.contrib.auth.models import User
 
 from .models import ChatMessage
 
@@ -28,11 +29,12 @@ def ws_connect(message, room_name):
     message.reply_channel.send({"accept": True})
     message.channel_session['room'] = room_name
 
-    if message.user is not None:
+    if message.user is not None and not message.user.is_anonymous:
         message.channel_session['username'] = message.user.username
         Group("chat-%s" % room_name).add(message.reply_channel)
     else:
         message.reply_channel.send({"close": True})
+        return
 
     last_messages = ChatMessage.objects.filter(room=room_name).order_by('-post_date')[:3]
     for cm in reversed(last_messages):
