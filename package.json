@@ -6,14 +6,27 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/queltos/djat.git"
-  },
+  "repository": "git+https://github.com/queltos/djat.git",
   "author": "queltos",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/queltos/djat/issues"
   },
-  "homepage": "https://github.com/queltos/djat#readme"
+  "homepage": "https://github.com/queltos/djat#readme",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-loader": "^7.1.2",
+    "react": "^15.6.1",
+    "webpack": "^3.6.0",
+    "webpack-bundle-tracker": "^0.2.0"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "react-dom": "^15.6.1"
+  }
 }
