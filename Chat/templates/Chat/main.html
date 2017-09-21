@@ -1,10 +1,5 @@
-{% load staticfiles %}
-<script type="text/javascript" src="{% static "Chat/client.js" %}"></script>
+{#{% load staticfiles %}#}
+{#<script type="text/javascript" src="{% static "Chat/client.js" %}"></script>#}
 
-<a href="/logout" style="float: right;">logout</a>
-<div id="room"></div>
-<div id="chat"></div>
 <div><p>logged in as {{ user }}</p></div>
-<div>
-  <input id="msgInput" onkeydown = "if (event.keyCode === 13) onSend();"/>
-</div>
+<iframe frameborder="0" src="http://localhost:3000"></iframe>
