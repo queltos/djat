@@ -8,8 +8,9 @@ from django.views.decorators.http import require_POST
 
 @login_required(login_url='/login')
 def index(request):
-    context = {'user': request.user.username}
-    return render(request, 'Chat/main.html', context)
+    return redirect('http://localhost:3000')
+    # context = {'user': request.user.username}
+    # return render(request, 'Chat/main.html', context)
 
 
 @require_POST
