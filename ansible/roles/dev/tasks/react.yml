@@ -18,9 +18,11 @@
   yum: name=yarn
 
 ###### LEARNING REACT ######
-# yarn global add webpack
+# sudo yarn global add webpack
 # yarn add babel-core babel-loader babel-preset-env babel-preset-react babel-preset-stage-0 --save-dev
 # yarn add react react-dom --save
+#
+# sudo yarn global add webpack-dev-server
 ############################
 
   # REACT INSTALLATION HOWTO:
