@@ -31,7 +31,7 @@ const ChatMessage = ({message, upvotes}) => {
 
 ChatMessage.propTypes = {
   message: PropTypes.string.isRequired,
-  upvotes: PropTypes.int
+  upvotes: PropTypes.number
 }
 
 ChatMessage.defaultProps = {
