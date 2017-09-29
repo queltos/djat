@@ -1,16 +1,14 @@
 import React from 'react'
 import {render} from 'react-dom'
 
-import FancyChat from './components/chat'
+import Chat from './components/chat'
 
-const doRender = () => render(
+render(
   <div>
     <div id="room"></div>
     <div id="chat"></div>
-    <FancyChat />
+    <Chat />
   </div>,
 
   document.getElementById('root')
 )
-
-doRender()
