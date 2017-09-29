@@ -1,18 +1,62 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import ChatInput from "./input"
+import MessageList from "./message_list"
 
-import ChatMessage from './chat_message'
+class Chat extends React.Component {
+  constructor(props) {
+    super(props)
 
-const Chat = ({messages}) => {
-  console.log(messages)
-  let chatstream = messages.map((message, i) => <ChatMessage key={i} message={message.text}/>)
-  console.log(chatstream)
+    this.state = {messages: []}
+  }
 
-  return (<div>{chatstream}</div>)
-}
+  addMessage(message) {
+    let messages = [...this.state.messages, {text: message["message"], username: message["username"]}]
+    this.setState({messages})
+  }
 
-Chat.propTypes = {
-  messages: PropTypes.array.isRequired
+  render() {
+    return (
+      <div>
+        <MessageList messages={this.state.messages}/>
+        <ChatInput onInput={this.onInput}/>
+      </div>
+    )
+  }
+
+  join = (room) => {
+    if (!room) return;
+
+    if (this.socket && this.socket.readyState === WebSocket.OPEN) this.socket.close();
+    console.log("connecting to " + window.location.host);
+    this.socket = new WebSocket("ws://" + window.location.hostname + ":8000/" + room);
+
+    document.getElementById("chat").innerHTML = '';
+
+    this.socket.onmessage = (e) => {
+      let data = JSON.parse(e.data);
+      const {messages} = this.state
+      this.setState({messages: [...messages, {text: data["message"], username: data["username"]}]})
+    };
+
+    this.socket.onopen = () => {
+      let msg = document.createElement("p");
+      let text = document.createTextNode("Current room: " + room);
+      msg.appendChild(text);
+      let roomDisplay = document.getElementById("room");
+      if (roomDisplay.firstChild) {
+        roomDisplay.replaceChild(msg, roomDisplay.firstChild);
+      } else {
+        roomDisplay.appendChild(msg);
+      }
+    };
+  }
+
+  onInput = (value) => {
+    if (value.startsWith('/join ')) {
+      const room = value.split(' ')[1];
+      this.join(room);
+    } else if (this.socket.readyState === WebSocket.OPEN) this.socket.send(value);
+  }
 }
 
 export default Chat
