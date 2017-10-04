@@ -9,7 +9,7 @@ class Chat extends React.Component {
     this.state = {messages: []}
   }
 
-  addMessage(message) {
+  addMessage = (message) => {
     let messages = [...this.state.messages, {text: message["message"], username: message["username"]}]
     this.setState({messages})
   }
