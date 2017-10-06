@@ -25,8 +25,8 @@ import PropTypes from 'prop-types'
 
 
 // ##### Stateless functional component version #####
-const ChatMessage = ({message, upvotes}) => {
-  return (<p>{upvotes}: {message}</p>)
+const ChatMessage = ({message, username}) => {
+  return (<p>{username}: {message}</p>)
 }
 
 ChatMessage.propTypes = {
