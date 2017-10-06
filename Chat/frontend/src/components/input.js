@@ -3,13 +3,16 @@ import PropTypes from 'prop-types'
 
 const ChatInput = ({onInput}) =>
   <div>
-    <input id="msgInput" onKeyDown={(event) => {
-        if (event.keyCode === 13) {
-          onInput(event.target.value)
-          event.target.value = ""
-        }
-      }
-    }/>
+    <input id="msgInput"
+           onKeyDown={
+             (event) => {
+               if (event.keyCode === 13) {
+                 onInput(event.target.value)
+                 event.target.value = ""
+               }
+             }
+           }
+    />
   </div>
 
 ChatInput.propTypes = {
