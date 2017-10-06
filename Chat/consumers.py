@@ -48,11 +48,15 @@ def ws_connect(message, room_name):
 
 @channel_session_user
 def ws_message(message):
-    Channel("chat-messages").send({
-        "room": message.channel_session['room'],
-        "username": message.channel_session['username'],
-        "message": message['text'],
-    })
+    decoded = json.loads(message['text'])
+    if decoded['type'] == 'chat-message':
+        Channel("chat-messages").send({
+            "room": message.channel_session['room'],
+            "username": message.channel_session['username'],
+            "message": decoded['text'],
+        })
+    elif decoded['type'] == 'question':
+        print('new question: {}'.format(decoded['text']))
 
 
 @channel_session_user

@@ -6,7 +6,7 @@ class Chat extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {messages: []}
+    this.state = {messages: [], questions: []}
   }
 
   addMessage = (message) => {
@@ -53,9 +53,26 @@ class Chat extends React.Component {
 
   onInput = (value) => {
     if (value.startsWith('/join ')) {
-      const room = value.split(' ')[1];
-      this.join(room);
-    } else if (this.socket.readyState === WebSocket.OPEN) this.socket.send(value);
+      const room = value.split(' ')[1]
+      this.join(room)
+      return
+    }
+
+    let message
+
+    if (value.startsWith('/ask ')) {
+      message = {
+        "type": "question",
+        "text": value.replace(/^\/ask /, '')
+      }
+    } else {
+      message = {
+        "type": "chat-message",
+        "text": value
+      }
+    }
+
+    if (this.socket.readyState === WebSocket.OPEN) this.socket.send(JSON.stringify(message));
   }
 }
 
